@@ -13,3 +13,5 @@
 
 infraviz
 Gopkg.lock
+
+vendor/
