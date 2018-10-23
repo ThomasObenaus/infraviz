@@ -1,1 +1,1 @@
-# infraviz
+# infraviz [![CircleCI](https://circleci.com/gh/ThomasObenaus/infraviz.svg?style=svg)](https://circleci.com/gh/ThomasObenaus/infraviz) [![GoDoc](https://godoc.org/github.com/ThomasObenaus/infraviz?status.svg)](https://godoc.org/github.com/ThomasObenaus/infraviz) [![Go Report Card](https://goreportcard.com/badge/github.com/ThomasObenaus/infraviz)](https://goreportcard.com/report/github.com/ThomasObenaus/infraviz)
