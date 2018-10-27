@@ -58,13 +58,11 @@ func main() {
 	snode.NodeLabel = &nodeLabel
 	node.Data = []gml.Data{gml.Data{Key: nodeKeyID, ShapeNode: snode}}
 
-	graph := gml.Graph{EdgeDefault: gml.Directed, ID: "G"}
-	graph.Nodes = append(graph.Nodes, node)
-	doc := gml.NewEmptyDocument()
-	doc.Graphs = append(doc.Graphs, graph)
-	doc.Keys = append(doc.Keys, nodeKey)
+	doc := gml.NewInitializedDocument()
+	doc.AddNode(node)
+	doc.AddKey(nodeKey)
 
-	if err = gml.Encode(os.Stdout, doc); err != nil {
+	if err = doc.Encode(os.Stdout); err != nil {
 		tracer.Error("Failed to encode: ", err.Error())
 	}
 }
