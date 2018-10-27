@@ -4,32 +4,21 @@
           <node id="n0">
               <data key="k0">
                   <y:ShapeNode>
-                      <y:Geometry height="20" width="20" x="0" y="0"></y:Geometry>
+                      <y:Geometry height="100" width="100" x="0" y="0"></y:Geometry>
                       <y:Shape type="rectangle"></y:Shape>
-                      <y:NodeLabel alignement="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" horizontalTextPosition="center" verticalTextPosition="bottom">huhu</y:NodeLabel>
+                      <y:NodeLabel alignement="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" horizontalTextPosition="center" verticalTextPosition="bottom">10.106.0.0/16</y:NodeLabel>
                   </y:ShapeNode>
               </data>
           </node>
           <node id="n1">
               <data key="k0">
                   <y:ShapeNode>
-                      <y:Geometry height="80" width="120" x="50" y="50"></y:Geometry>
+                      <y:Geometry height="100" width="100" x="0" y="0"></y:Geometry>
                       <y:Shape type="rectangle"></y:Shape>
-                      <y:NodeLabel alignement="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" horizontalTextPosition="center" verticalTextPosition="bottom">huhu2</y:NodeLabel>
+                      <y:NodeLabel alignement="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" horizontalTextPosition="center" verticalTextPosition="bottom">172.31.0.0/16</y:NodeLabel>
                   </y:ShapeNode>
               </data>
           </node>
-          <edge id="e0" source="n0" target="n1">
-              <data key="k1">
-                  <y:PolyLineEdge>
-                      <y:Path sx="0" sy="0" tx="0" ty="0"></y:Path>
-                      <y:LineStyle color="#000000" type="line" width="1"></y:LineStyle>
-                      <y:Arrows source="none" target="none"></y:Arrows>
-                      <y:BendStyle smoothed="false"></y:BendStyle>
-                      <y:EdgeLabel alignement="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" horizontalTextPosition="center" verticalTextPosition="bottom">Connects vpc 1 and 2</y:EdgeLabel>
-                  </y:PolyLineEdge>
-              </data>
-          </edge>
       </graph>
       <key id="k0" for="node" yfiles.type="nodegraphics"></key>
       <key id="k1" for="edge" yfiles.type="edgegraphics"></key>

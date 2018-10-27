@@ -7,6 +7,7 @@ import (
 	"github.com/thomasobenaus/inframapper/tfstate"
 	"github.com/thomasobenaus/inframapper/trace"
 	yed "github.com/thomasobenaus/infraviz/drawyed"
+	nw "github.com/thomasobenaus/infraviz/network"
 )
 
 func main() {
@@ -25,7 +26,7 @@ func main() {
 		Region:     "eu-central-1",
 	}
 
-	mappedInfra, err := mappedInfra.LoadAndMap(profile, region, remoteCfg, tracerMapper)
+	mInfra, err := mappedInfra.LoadAndMap(profile, region, remoteCfg, tracerMapper)
 
 	tracer := trace.NewInfo(os.Stdout)
 	if err != nil {
@@ -34,18 +35,34 @@ func main() {
 
 	var mappedResStr string
 	var unMappedAwsResStr string
-	for _, res := range mappedInfra.MappedResources() {
+	for _, res := range mInfra.MappedResources() {
 		mappedResStr += "\t" + res.String() + "\n"
 	}
-	for _, res := range mappedInfra.UnMappedAwsResources() {
+	for _, res := range mInfra.UnMappedAwsResources() {
 		unMappedAwsResStr += "\t" + res.String() + "\n"
 	}
 
-	tracer.Info("Mapped Infra: ", mappedInfra)
-	tracer.Info("Mapped Resources [", len(mappedInfra.MappedResources()), "]:")
+	tracer.Info("Mapped Infra: ", mInfra)
+	tracer.Info("Mapped Resources [", len(mInfra.MappedResources()), "]:")
 	tracer.Info(mappedResStr)
-	tracer.Info("UnMapped AWS Resources [", len(mappedInfra.UnMappedAwsResources()), "]:")
+	tracer.Info("UnMapped AWS Resources [", len(mInfra.UnMappedAwsResources()), "]:")
 	tracer.Info(unMappedAwsResStr)
+
+	vpcs := make([]nw.VPC, 0)
+	//for _, mRes := range mInfra.Resources() {
+	//	if mappedInfra.TypeVPC != mRes.ResourceType() {
+	//		continue
+	//	}
+
+	//mappedVpc := mappedInfra.ToVpc(mRes)
+
+	//awsVPC := mRes.Aws().(*aws.Vpc)
+	//vpc := nw.VPC{
+	//	CIDR: awsVPC.CIDR,
+	//}
+
+	//vpcs = append(vpcs, vpc)
+	//}
 
 	file, err := os.Create("testdata/rectangle.graphml")
 	if err != nil {
@@ -54,9 +71,14 @@ func main() {
 	defer file.Close()
 
 	yedd := yed.NewYedDraw(file)
-	r1 := yedd.Rectangle(0, 0, 20, 20, "huhu")
-	r2 := yedd.Rectangle(50, 50, 120, 80, "huhu2")
-	yedd.Edge(r1, r2, "Connects vpc 1 and 2")
+
+	yedd.DrawVPC(vpcs)
+
+	//r1 := yedd.Rectangle(0, 0, 20, 20, "VPC 1")
+	//r2 := yedd.Rectangle(50, 50, 120, 80, "VPC 2")
+	//r3 := yedd.Rectangle(150, 150, 120, 80, "VPC 3")
+	//yedd.Edge(r1, r2, "Connects vpc 1 and 2")
+	//yedd.Edge(r1, r3, "Connects vpc 1 and 3")
 
 	if err = yedd.Render(); err != nil {
 		tracer.Error("Failed to render: ", err.Error())
