@@ -23,7 +23,7 @@ type Document struct {
 }
 
 type meta struct {
-	keyIDNodeGraphics string // id of the key for yed
+	keyIDNodeGraphics string // id of the key for yed nodegraphics
 }
 
 // AddNode adds the given node to the main graph
@@ -51,8 +51,17 @@ func (d *Document) Encode(w io.Writer) error {
 	return nil
 }
 
+// KeyIDNodeGraphics returns the keyID for nodegraphics
+func (d *Document) KeyIDNodeGraphics() string {
+	return d.meta.keyIDNodeGraphics
+}
+
 func (d *Document) newGraphID() string {
-	return "G" + strconv.Itoa(len(d.Graphs))
+	return "g" + strconv.Itoa(len(d.Graphs))
+}
+
+func (d *Document) newKeyID() string {
+	return "k" + strconv.Itoa(len(d.Keys))
 }
 
 // NewEmptyDocument creates an empty Document
@@ -74,5 +83,15 @@ func NewInitializedDocument() Document {
 	doc := NewEmptyDocument()
 	graph := NewGraph(doc.newGraphID())
 	doc.Graphs = append(doc.Graphs, graph)
+
+	// add the key needed for yed graphics
+	doc.meta.keyIDNodeGraphics = doc.newKeyID()
+	keyNodeGraphics := Key{
+		For:    "node",
+		YFType: "nodegraphics",
+		ID:     doc.meta.keyIDNodeGraphics,
+	}
+	doc.Keys = append(doc.Keys, keyNodeGraphics)
+
 	return doc
 }

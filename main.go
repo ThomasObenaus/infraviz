@@ -47,8 +47,9 @@ func main() {
 	tracer.Info("UnMapped AWS Resources [", len(mappedInfra.UnMappedAwsResources()), "]:")
 	tracer.Info(unMappedAwsResStr)
 
-	nodeKeyID := "d6"
-	nodeKey := yed.NewYedNodeKey(nodeKeyID)
+	doc := yed.NewInitializedDocument()
+
+	nodeKeyID := doc.KeyIDNodeGraphics()
 
 	node := yed.Node{ID: "n0"}
 	snode := &yed.ShapeNode{}
@@ -58,11 +59,19 @@ func main() {
 	snode.NodeLabel = &nodeLabel
 	node.Data = []yed.Data{yed.Data{Key: nodeKeyID, ShapeNode: snode}}
 
-	doc := yed.NewInitializedDocument()
 	doc.AddNode(node)
-	doc.AddKey(nodeKey)
 
 	if err = doc.Encode(os.Stdout); err != nil {
+		tracer.Error("Failed to encode: ", err.Error())
+	}
+
+	file, err := os.Create("testdata/rectangle.graphml")
+	if err != nil {
+		tracer.Error("Failed to open file: ", err.Error())
+	}
+	defer file.Close()
+
+	if err = doc.Encode(file); err != nil {
 		tracer.Error("Failed to encode: ", err.Error())
 	}
 }

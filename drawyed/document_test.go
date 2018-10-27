@@ -19,6 +19,7 @@ func TestNewInitializedDocument(t *testing.T) {
 	doc := NewInitializedDocument()
 	assert.NotNil(t, doc)
 	assert.Equal(t, 1, len(doc.Graphs))
+	assert.Equal(t, 1, len(doc.Keys))
 }
 
 func TestAddNode(t *testing.T) {
@@ -38,7 +39,7 @@ func TestAddKey(t *testing.T) {
 	key := Key{}
 	doc.AddKey(key)
 	doc.AddKey(key)
-	assert.Equal(t, 2, len(doc.Keys))
+	assert.Equal(t, 3, len(doc.Keys))
 }
 
 func TestEncode(t *testing.T) {
@@ -52,5 +53,5 @@ func TestEncode(t *testing.T) {
 	rendered := buf.String()
 	assert.Contains(t, rendered, xml.Header)
 	assert.Contains(t, rendered, "http://graphml.graphdrawing.org/xmlns")
-	assert.Contains(t, rendered, "<graph id=\"G0\" edgedefault=\"directed\">")
+	assert.Contains(t, rendered, "<graph id=\"g0\" edgedefault=\"directed\">")
 }
