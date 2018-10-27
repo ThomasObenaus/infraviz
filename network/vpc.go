@@ -1,8 +1,7 @@
 package network
 
-import aws "github.com/thomasobenaus/inframapper/aws"
+import "github.com/thomasobenaus/inframapper/mappedInfra"
 
 type VPC struct {
-	AwsVpc aws.Vpc
-	Label  string
+	Vpc *mappedInfra.Vpc
 }

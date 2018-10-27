@@ -49,20 +49,19 @@ func main() {
 	tracer.Info(unMappedAwsResStr)
 
 	vpcs := make([]nw.VPC, 0)
-	//for _, mRes := range mInfra.Resources() {
-	//	if mappedInfra.TypeVPC != mRes.ResourceType() {
-	//		continue
-	//	}
+	for _, mRes := range mInfra.Resources() {
+		if mappedInfra.TypeVPC != mRes.ResourceType() {
+			continue
+		}
 
-	//mappedVpc := mappedInfra.ToVpc(mRes)
-
-	//awsVPC := mRes.Aws().(*aws.Vpc)
-	//vpc := nw.VPC{
-	//	CIDR: awsVPC.CIDR,
-	//}
-
-	//vpcs = append(vpcs, vpc)
-	//}
+		mappedVpc, err := mappedInfra.ToVpc(mRes)
+		if err != nil {
+			tracer.Error("Unable to cast to Vpc")
+			continue
+		}
+		vpc := nw.VPC{Vpc: mappedVpc}
+		vpcs = append(vpcs, vpc)
+	}
 
 	file, err := os.Create("testdata/rectangle.graphml")
 	if err != nil {
@@ -73,12 +72,6 @@ func main() {
 	yedd := yed.NewYedDraw(file)
 
 	yedd.DrawVPC(vpcs)
-
-	//r1 := yedd.Rectangle(0, 0, 20, 20, "VPC 1")
-	//r2 := yedd.Rectangle(50, 50, 120, 80, "VPC 2")
-	//r3 := yedd.Rectangle(150, 150, 120, 80, "VPC 3")
-	//yedd.Edge(r1, r2, "Connects vpc 1 and 2")
-	//yedd.Edge(r1, r3, "Connects vpc 1 and 3")
 
 	if err = yedd.Render(); err != nil {
 		tracer.Error("Failed to render: ", err.Error())

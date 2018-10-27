@@ -1,18 +1,21 @@
 package drawyed
 
 import (
-	"strconv"
-
 	"github.com/thomasobenaus/infraviz/network"
 )
 
 func (d *YedDraw) DrawVPC(vpcs []network.VPC) {
-	//doc := &d.doc
+	for _, vpc := range vpcs {
 
-	for idx, _ := range vpcs {
+		awsVpc := vpc.Vpc.AwsVpc
+		tfVpc := vpc.Vpc.TfVpc
 
-		label := "vpc.CIDR" + strconv.Itoa(idx)
+		label := awsVpc.CIDR + "\n(" + awsVpc.VpcID
 
+		if tfVpc != nil {
+			label += "/" + tfVpc.Name()
+		}
+		label += ")"
 		d.Rectangle(0, 0, 100, 100, label)
 
 	}
