@@ -15,3 +15,5 @@ infraviz
 Gopkg.lock
 
 vendor/
+
+debug

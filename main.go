@@ -47,31 +47,17 @@ func main() {
 	tracer.Info("UnMapped AWS Resources [", len(mappedInfra.UnMappedAwsResources()), "]:")
 	tracer.Info(unMappedAwsResStr)
 
-	doc := yed.NewInitializedDocument()
-
-	nodeKeyID := doc.KeyIDNodeGraphics()
-
-	node := yed.Node{ID: "n0"}
-	snode := &yed.ShapeNode{}
-	snode.Geometry = yed.Geometry{Height: 30.0, Width: 30.0, X: 800.5, Y: 350}
-	snode.Shape = yed.Shape{ShapeType: yed.Rectangle}
-	nodeLabel := yed.NewNodeLabel("Hello World")
-	snode.NodeLabel = &nodeLabel
-	node.Data = []yed.Data{yed.Data{Key: nodeKeyID, ShapeNode: snode}}
-
-	doc.AddNode(node)
-
-	if err = doc.Encode(os.Stdout); err != nil {
-		tracer.Error("Failed to encode: ", err.Error())
-	}
-
 	file, err := os.Create("testdata/rectangle.graphml")
 	if err != nil {
 		tracer.Error("Failed to open file: ", err.Error())
 	}
 	defer file.Close()
 
-	if err = doc.Encode(file); err != nil {
-		tracer.Error("Failed to encode: ", err.Error())
+	yedd := yed.NewYedDraw(file)
+	yedd.Rectangle(0, 0, 20, 20, "huhu")
+	yedd.Rectangle(50, 50, 120, 80, "huhu2")
+
+	if err = yedd.Render(); err != nil {
+		tracer.Error("Failed to render: ", err.Error())
 	}
 }

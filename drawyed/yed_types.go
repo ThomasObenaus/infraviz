@@ -42,31 +42,3 @@ const (
 type Shape struct {
 	ShapeType ShapeType `xml:"type,attr"`
 }
-
-func NewNodeLabel(label string) NodeLabel {
-	return NodeLabel{
-		Label:                  label,
-		Alignment:              "center",
-		AutoSizePolicy:         "content",
-		FontFamily:             "Dialog",
-		FontSize:               12,
-		FontStyle:              "plain",
-		HorizontalTextPosition: "center",
-		VerticalTextPosition:   "bottom",
-	}
-}
-
-type NodeLabel struct {
-	Label                  string `xml:",chardata"`
-	Alignment              string `xml:"alignement,attr"`
-	AutoSizePolicy         string `xml:"autoSizePolicy,attr"`
-	FontFamily             string `xml:"fontFamily,attr"`
-	FontSize               int    `xml:"fontSize,attr"`
-	FontStyle              string `xml:"fontStyle,attr"`
-	HorizontalTextPosition string `xml:"horizontalTextPosition,attr"`
-	VerticalTextPosition   string `xml:"verticalTextPosition,attr"`
-}
-
-func NewYedNodeKey(id string) Key {
-	return Key{ID: id, For: "node", YFType: "nodegraphics"}
-}

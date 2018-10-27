@@ -4,9 +4,18 @@
           <node id="n0">
               <data key="k0">
                   <y:ShapeNode>
-                      <y:Geometry height="30" width="30" x="800.5" y="350"></y:Geometry>
+                      <y:Geometry height="20" width="20" x="0" y="0"></y:Geometry>
                       <y:Shape type="rectangle"></y:Shape>
-                      <y:NodeLabel alignement="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" horizontalTextPosition="center" verticalTextPosition="bottom">Hello World</y:NodeLabel>
+                      <y:NodeLabel alignement="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" horizontalTextPosition="center" verticalTextPosition="bottom">huhu</y:NodeLabel>
+                  </y:ShapeNode>
+              </data>
+          </node>
+          <node id="n1">
+              <data key="k0">
+                  <y:ShapeNode>
+                      <y:Geometry height="80" width="120" x="50" y="50"></y:Geometry>
+                      <y:Shape type="rectangle"></y:Shape>
+                      <y:NodeLabel alignement="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" horizontalTextPosition="center" verticalTextPosition="bottom">huhu2</y:NodeLabel>
                   </y:ShapeNode>
               </data>
           </node>

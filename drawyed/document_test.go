@@ -55,3 +55,14 @@ func TestEncode(t *testing.T) {
 	assert.Contains(t, rendered, "http://graphml.graphdrawing.org/xmlns")
 	assert.Contains(t, rendered, "<graph id=\"g0\" edgedefault=\"directed\">")
 }
+
+func TestNewNodeID(t *testing.T) {
+
+	doc := NewEmptyDocument()
+	assert.NotNil(t, doc)
+	nID := doc.newNodeID()
+	assert.Equal(t, "n0", nID)
+
+	nID = doc.newNodeID()
+	assert.Equal(t, "n1", nID)
+}

@@ -20,10 +20,16 @@ type Document struct {
 	Graphs       []Graph  `xml:"graph"`
 	Keys         []Key    `xml:"key,omitempty"`
 	meta         meta
+	style        style
 }
 
 type meta struct {
 	keyIDNodeGraphics string // id of the key for yed nodegraphics
+	lastNodeID        int    // the last used node id
+}
+
+type style struct {
+	nodeLabelStyle labelStyle
 }
 
 // AddNode adds the given node to the main graph
@@ -60,6 +66,12 @@ func (d *Document) newGraphID() string {
 	return "g" + strconv.Itoa(len(d.Graphs))
 }
 
+func (d *Document) newNodeID() string {
+	nodeID := "n" + strconv.Itoa(d.meta.lastNodeID)
+	d.meta.lastNodeID++
+	return nodeID
+}
+
 func (d *Document) newKeyID() string {
 	return "k" + strconv.Itoa(len(d.Keys))
 }
@@ -81,6 +93,9 @@ func NewEmptyDocument() Document {
 // NewInitializedDocument creates an initialized Document, having one graph
 func NewInitializedDocument() Document {
 	doc := NewEmptyDocument()
+
+	doc.style.nodeLabelStyle = defaultLabelStyle
+
 	graph := NewGraph(doc.newGraphID())
 	doc.Graphs = append(doc.Graphs, graph)
 
