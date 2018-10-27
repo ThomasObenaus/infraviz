@@ -3,6 +3,7 @@ package graphml
 import (
 	"encoding/xml"
 	"io"
+	"strconv"
 )
 
 // Document represents the toplevel structure for a Graphml document
@@ -45,6 +46,10 @@ func (d *Document) Encode(w io.Writer) error {
 	return nil
 }
 
+func (d *Document) newGraphID() string {
+	return "G" + strconv.Itoa(len(d.Graphs))
+}
+
 // NewEmptyDocument creates an empty Document
 func NewEmptyDocument() Document {
 	return Document{
@@ -62,7 +67,7 @@ func NewEmptyDocument() Document {
 // NewInitializedDocument creates an initialized Document, having one graph
 func NewInitializedDocument() Document {
 	doc := NewEmptyDocument()
-	graph := NewGraph()
+	graph := NewGraph(doc.newGraphID())
 	doc.Graphs = append(doc.Graphs, graph)
 	return doc
 }
