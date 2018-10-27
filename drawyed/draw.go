@@ -1,4 +1,4 @@
-package graphml
+package drawyed
 
 import "io"
 

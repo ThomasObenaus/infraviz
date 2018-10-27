@@ -1,4 +1,4 @@
-package graphml
+package drawyed
 
 type ShapeNode struct {
 	Geometry    Geometry     `xml:"y:Geometry,omitempty"`

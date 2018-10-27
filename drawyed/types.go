@@ -1,4 +1,4 @@
-package graphml
+package drawyed
 
 type Key struct {
 	ID       string `xml:"id,attr,omitempty"`

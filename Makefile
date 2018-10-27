@@ -7,13 +7,13 @@ all: vendor build tools cover finish
 test:
 	@echo "----------------------------------------------------------------------------------"
 	@echo "--> Run the unit-tests"
-	@go test ./graphml -v
+	@go test ./drawyed -v
 
 .PHONY: cover
 cover: 
 	@echo "----------------------------------------------------------------------------------"
 	@echo "--> Run the unit-tests + coverage"
-	@go test ./graphml -v -covermode=count -coverprofile=coverage.out
+	@go test ./drawyed -v -covermode=count -coverprofile=coverage.out
 
 cover.upload:
 	# for this to get working you have to export the repo_token for your repo at coveralls.io

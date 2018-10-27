@@ -1,4 +1,4 @@
-package graphml
+package drawyed
 
 import (
 	"encoding/xml"
@@ -6,7 +6,7 @@ import (
 	"strconv"
 )
 
-// Document represents the toplevel structure for a Graphml document
+// Document represents the toplevel structure for a Graphml (yed) document
 type Document struct {
 	XMLName      xml.Name `xml:"graphml"`
 	Xmlns        string   `xml:"xmlns,attr"`
@@ -19,6 +19,11 @@ type Document struct {
 	XsiSchemaLoc string   `xml:"xsi:schemaLocation,attr"`
 	Graphs       []Graph  `xml:"graph"`
 	Keys         []Key    `xml:"key,omitempty"`
+	meta         meta
+}
+
+type meta struct {
+	keyIDNodeGraphics string // id of the key for yed
 }
 
 // AddNode adds the given node to the main graph

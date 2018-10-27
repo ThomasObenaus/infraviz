@@ -6,7 +6,7 @@ import (
 	"github.com/thomasobenaus/inframapper/mappedInfra"
 	"github.com/thomasobenaus/inframapper/tfstate"
 	"github.com/thomasobenaus/inframapper/trace"
-	gml "github.com/thomasobenaus/infraviz/graphml"
+	yed "github.com/thomasobenaus/infraviz/drawyed"
 )
 
 func main() {
@@ -48,17 +48,17 @@ func main() {
 	tracer.Info(unMappedAwsResStr)
 
 	nodeKeyID := "d6"
-	nodeKey := gml.NewYedNodeKey(nodeKeyID)
+	nodeKey := yed.NewYedNodeKey(nodeKeyID)
 
-	node := gml.Node{ID: "n0"}
-	snode := &gml.ShapeNode{}
-	snode.Geometry = gml.Geometry{Height: 30.0, Width: 30.0, X: 800.5, Y: 350}
-	snode.Shape = gml.Shape{ShapeType: gml.Rectangle}
-	nodeLabel := gml.NewNodeLabel("Hello World")
+	node := yed.Node{ID: "n0"}
+	snode := &yed.ShapeNode{}
+	snode.Geometry = yed.Geometry{Height: 30.0, Width: 30.0, X: 800.5, Y: 350}
+	snode.Shape = yed.Shape{ShapeType: yed.Rectangle}
+	nodeLabel := yed.NewNodeLabel("Hello World")
 	snode.NodeLabel = &nodeLabel
-	node.Data = []gml.Data{gml.Data{Key: nodeKeyID, ShapeNode: snode}}
+	node.Data = []yed.Data{yed.Data{Key: nodeKeyID, ShapeNode: snode}}
 
-	doc := gml.NewInitializedDocument()
+	doc := yed.NewInitializedDocument()
 	doc.AddNode(node)
 	doc.AddKey(nodeKey)
 
