@@ -36,7 +36,7 @@ type BorderStyle struct {
 type ShapeType string
 
 const (
-	Rectangle ShapeType = "rectangle"
+	STypeRectangle ShapeType = "rectangle"
 )
 
 type Shape struct {

@@ -54,8 +54,9 @@ func main() {
 	defer file.Close()
 
 	yedd := yed.NewYedDraw(file)
-	yedd.Rectangle(0, 0, 20, 20, "huhu")
-	yedd.Rectangle(50, 50, 120, 80, "huhu2")
+	r1 := yedd.Rectangle(0, 0, 20, 20, "huhu")
+	r2 := yedd.Rectangle(50, 50, 120, 80, "huhu2")
+	yedd.Edge(r1, r2, "Connects vpc 1 and 2")
 
 	if err = yedd.Render(); err != nil {
 		tracer.Error("Failed to render: ", err.Error())

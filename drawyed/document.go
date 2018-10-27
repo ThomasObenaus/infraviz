@@ -25,16 +25,24 @@ type Document struct {
 
 type meta struct {
 	keyIDNodeGraphics string // id of the key for yed nodegraphics
+	keyIDEdgeGraphics string // id of the key for yed edgegraphics
 	lastNodeID        int    // the last used node id
+	lastEdgeID        int    // the last used edge id
 }
 
 type style struct {
-	nodeLabelStyle labelStyle
+	nodeLabelStyle nodeLabelStyle
+	edgeLabelStyle edgeLabelStyle
 }
 
 // AddNode adds the given node to the main graph
 func (d *Document) AddNode(node Node) {
 	d.Graphs[0].AddNode(node)
+}
+
+// AddEdge adds the given edge to the main graph
+func (d *Document) AddEdge(edge Edge) {
+	d.Graphs[0].AddEdge(edge)
 }
 
 // AddKey adds a key to the Document
@@ -62,6 +70,11 @@ func (d *Document) KeyIDNodeGraphics() string {
 	return d.meta.keyIDNodeGraphics
 }
 
+// KeyIDEdgeGraphics returns the keyID for edgegraphics
+func (d *Document) KeyIDEdgeGraphics() string {
+	return d.meta.keyIDEdgeGraphics
+}
+
 func (d *Document) newGraphID() string {
 	return "g" + strconv.Itoa(len(d.Graphs))
 }
@@ -74,6 +87,12 @@ func (d *Document) newNodeID() string {
 
 func (d *Document) newKeyID() string {
 	return "k" + strconv.Itoa(len(d.Keys))
+}
+
+func (d *Document) newEdgeID() string {
+	edgeID := "e" + strconv.Itoa(d.meta.lastEdgeID)
+	d.meta.lastEdgeID++
+	return edgeID
 }
 
 // NewEmptyDocument creates an empty Document
@@ -94,7 +113,8 @@ func NewEmptyDocument() Document {
 func NewInitializedDocument() Document {
 	doc := NewEmptyDocument()
 
-	doc.style.nodeLabelStyle = defaultLabelStyle
+	doc.style.nodeLabelStyle = defaultNodeLabelStyle
+	doc.style.edgeLabelStyle = defaultEdgeLabelStyle
 
 	graph := NewGraph(doc.newGraphID())
 	doc.Graphs = append(doc.Graphs, graph)
@@ -107,6 +127,15 @@ func NewInitializedDocument() Document {
 		ID:     doc.meta.keyIDNodeGraphics,
 	}
 	doc.Keys = append(doc.Keys, keyNodeGraphics)
+
+	// add the key needed for yed edges
+	doc.meta.keyIDEdgeGraphics = doc.newKeyID()
+	keyEdgeGraphics := Key{
+		For:    "edge",
+		YFType: "edgegraphics",
+		ID:     doc.meta.keyIDEdgeGraphics,
+	}
+	doc.Keys = append(doc.Keys, keyEdgeGraphics)
 
 	return doc
 }

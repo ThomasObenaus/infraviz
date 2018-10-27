@@ -19,6 +19,18 @@
                   </y:ShapeNode>
               </data>
           </node>
+          <edge id="e0" source="n0" target="n1">
+              <data key="k1">
+                  <y:PolyLineEdge>
+                      <y:Path sx="0" sy="0" tx="0" ty="0"></y:Path>
+                      <y:LineStyle color="#000000" type="line" width="1"></y:LineStyle>
+                      <y:Arrows source="none" target="none"></y:Arrows>
+                      <y:BendStyle smoothed="false"></y:BendStyle>
+                      <y:EdgeLabel alignement="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" horizontalTextPosition="center" verticalTextPosition="bottom">Connects vpc 1 and 2</y:EdgeLabel>
+                  </y:PolyLineEdge>
+              </data>
+          </edge>
       </graph>
       <key id="k0" for="node" yfiles.type="nodegraphics"></key>
+      <key id="k1" for="edge" yfiles.type="edgegraphics"></key>
   </graphml>

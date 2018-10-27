@@ -8,8 +8,9 @@ type Key struct {
 }
 
 type Data struct {
-	Key       string     `xml:"key,attr"`
-	ShapeNode *ShapeNode `xml:"y:ShapeNode,omitempty"`
+	Key          string        `xml:"key,attr"`
+	ShapeNode    *ShapeNode    `xml:"y:ShapeNode,omitempty"`
+	PolyLineEdge *PolyLineEdge `xml:"y:PolyLineEdge,omitempty"`
 }
 
 type Node struct {

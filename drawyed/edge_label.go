@@ -1,21 +1,21 @@
 package drawyed
 
-var defaultNodeLabelStyle = nodeLabelStyle{
+var defaultEdgeLabelStyle = edgeLabelStyle{
 	Alignment:  "center",
 	FontFamily: "Dialog",
 	FontSize:   12,
 	FontStyle:  "plain",
 }
 
-type nodeLabelStyle struct {
+type edgeLabelStyle struct {
 	Alignment  string
 	FontFamily string
 	FontSize   int
 	FontStyle  string
 }
 
-func NewNodeLabel(label string, style nodeLabelStyle) NodeLabel {
-	return NodeLabel{
+func NewEdgeLabel(label string, style edgeLabelStyle) EdgeLabel {
+	return EdgeLabel{
 		Label:                  label,
 		Alignment:              style.Alignment,
 		AutoSizePolicy:         "content",
@@ -27,20 +27,20 @@ func NewNodeLabel(label string, style nodeLabelStyle) NodeLabel {
 	}
 }
 
-func NewDefaultNodeLabel(label string) NodeLabel {
-	return NodeLabel{
+func NewDefaultEdgeLabel(label string) EdgeLabel {
+	return EdgeLabel{
 		Label:                  label,
-		Alignment:              defaultNodeLabelStyle.Alignment,
+		Alignment:              defaultEdgeLabelStyle.Alignment,
 		AutoSizePolicy:         "content",
-		FontFamily:             defaultNodeLabelStyle.FontFamily,
-		FontSize:               defaultNodeLabelStyle.FontSize,
-		FontStyle:              defaultNodeLabelStyle.FontStyle,
+		FontFamily:             defaultEdgeLabelStyle.FontFamily,
+		FontSize:               defaultEdgeLabelStyle.FontSize,
+		FontStyle:              defaultEdgeLabelStyle.FontStyle,
 		HorizontalTextPosition: "center",
 		VerticalTextPosition:   "bottom",
 	}
 }
 
-type NodeLabel struct {
+type EdgeLabel struct {
 	Label                  string `xml:",chardata"`
 	Alignment              string `xml:"alignement,attr"`
 	AutoSizePolicy         string `xml:"autoSizePolicy,attr"`
