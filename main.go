@@ -6,6 +6,7 @@ import (
 	"github.com/thomasobenaus/inframapper/mappedInfra"
 	"github.com/thomasobenaus/inframapper/tfstate"
 	"github.com/thomasobenaus/inframapper/trace"
+	gml "github.com/thomasobenaus/infraviz/graphml"
 )
 
 func main() {
@@ -45,4 +46,25 @@ func main() {
 	tracer.Info(mappedResStr)
 	tracer.Info("UnMapped AWS Resources [", len(mappedInfra.UnMappedAwsResources()), "]:")
 	tracer.Info(unMappedAwsResStr)
+
+	nodeKeyID := "d6"
+	nodeKey := gml.NewYedNodeKey(nodeKeyID)
+
+	node := gml.Node{ID: "n0"}
+	snode := &gml.ShapeNode{}
+	snode.Geometry = gml.Geometry{Height: 30.0, Width: 30.0, X: 800.5, Y: 350}
+	snode.Shape = gml.Shape{ShapeType: gml.Rectangle}
+	nodeLabel := gml.NewNodeLabel("Hello World")
+	snode.NodeLabel = &nodeLabel
+	node.Data = []gml.Data{gml.Data{Key: nodeKeyID, ShapeNode: snode}}
+
+	graph := gml.Graph{EdgeDefault: gml.Directed, ID: "G"}
+	graph.Nodes = append(graph.Nodes, node)
+	doc := gml.NewEmptyDocument()
+	doc.Graphs = append(doc.Graphs, graph)
+	doc.Keys = append(doc.Keys, nodeKey)
+
+	if err = gml.Encode(os.Stdout, doc); err != nil {
+		tracer.Error("Failed to encode: ", err.Error())
+	}
 }
