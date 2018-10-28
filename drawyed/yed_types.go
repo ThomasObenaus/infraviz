@@ -20,24 +20,12 @@ type Fill struct {
 	Transparent bool   `xml:"transparent,attr"`
 }
 
-type BorderType string
-
-const (
-	Line BorderType = "line"
-)
-
 type BorderStyle struct {
 	Color  string     `xml:"color,attr"`
 	Raised bool       `xml:"raised,attr"`
 	Type   BorderType `xml:"type,attr"`
 	Width  float32    `xml:"width,attr"`
 }
-
-type ShapeType string
-
-const (
-	STypeRectangle ShapeType = "rectangle"
-)
 
 type Shape struct {
 	ShapeType ShapeType `xml:"type,attr"`
