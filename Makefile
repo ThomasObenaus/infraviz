@@ -36,12 +36,12 @@ build:
 depend.update:
 	@echo "----------------------------------------------------------------------------------"
 	@echo "--> updating dependencies from Gopkg.lock"
-	@dep ensure -update
+	@dep ensure -update -v
 
 depend.install:
 	@echo "----------------------------------------------------------------------------------"
 	@echo "--> install dependencies as listed in Gopkg.toml"
-	@dep ensure
+	@dep ensure -v
 
 #------------------
 #-- Tools
@@ -50,7 +50,7 @@ tools:
 	@go get golang.org/x/tools/cmd/cover
 	@go get github.com/mattn/goveralls	
 
-vendor: depend.install
+vendor: depend.install depend.update
 
 run: build
 	@echo "----------------------------------------------------------------------------------"
