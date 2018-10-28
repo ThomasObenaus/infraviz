@@ -4,6 +4,8 @@ import (
 	"encoding/xml"
 	"io"
 	"strconv"
+
+	"github.com/thomasobenaus/infraviz/stack"
 )
 
 // Document represents the toplevel structure for a Graphml (yed) document
@@ -31,8 +33,28 @@ type meta struct {
 }
 
 type style struct {
-	nodeLabelStyle nodeLabelStyle
+	nodeLabelStyle stack.Stack
 	edgeLabelStyle edgeLabelStyle
+}
+
+func (d *Document) PushNodeLabelStyle(style *nodeLabelStyle) {
+	d.style.nodeLabelStyle.Push(style)
+}
+
+func (d *Document) PopNodeLabelStyle() *nodeLabelStyle {
+	upper := d.style.nodeLabelStyle.Pop()
+	if upper != nil {
+		return upper.(*nodeLabelStyle)
+	}
+	return nil
+}
+
+func (d *Document) CurrentNodeLabelStyle() *nodeLabelStyle {
+	upper := d.style.nodeLabelStyle.Peek()
+	if upper != nil {
+		return upper.(*nodeLabelStyle)
+	}
+	return nil
 }
 
 // AddNode adds the given node to the main graph
@@ -113,7 +135,7 @@ func NewEmptyDocument() Document {
 func NewInitializedDocument() Document {
 	doc := NewEmptyDocument()
 
-	doc.style.nodeLabelStyle = defaultNodeLabelStyle
+	doc.PushNodeLabelStyle(&defaultNodeLabelStyle)
 	doc.style.edgeLabelStyle = defaultEdgeLabelStyle
 
 	graph := NewGraph(doc.newGraphID())

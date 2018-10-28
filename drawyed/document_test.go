@@ -8,16 +8,9 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNewEmptyDocument(t *testing.T) {
-
-	doc := NewEmptyDocument()
-	assert.NotNil(t, doc)
-}
-
 func TestNewInitializedDocument(t *testing.T) {
 
 	doc := NewInitializedDocument()
-	assert.NotNil(t, doc)
 	assert.Equal(t, 1, len(doc.Graphs))
 	assert.Equal(t, 2, len(doc.Keys))
 }
@@ -25,7 +18,6 @@ func TestNewInitializedDocument(t *testing.T) {
 func TestAddNode(t *testing.T) {
 
 	doc := NewInitializedDocument()
-	assert.NotNil(t, doc)
 	node := Node{}
 	doc.AddNode(node)
 	doc.AddNode(node)
@@ -35,7 +27,6 @@ func TestAddNode(t *testing.T) {
 func TestAddKey(t *testing.T) {
 
 	doc := NewInitializedDocument()
-	assert.NotNil(t, doc)
 	key := Key{}
 	doc.AddKey(key)
 	doc.AddKey(key)
@@ -44,7 +35,6 @@ func TestAddKey(t *testing.T) {
 
 func TestEncode(t *testing.T) {
 	doc := NewInitializedDocument()
-	assert.NotNil(t, doc)
 
 	var buf bytes.Buffer
 	err := doc.Encode(&buf)
@@ -59,10 +49,24 @@ func TestEncode(t *testing.T) {
 func TestNewNodeID(t *testing.T) {
 
 	doc := NewEmptyDocument()
-	assert.NotNil(t, doc)
 	nID := doc.newNodeID()
 	assert.Equal(t, "n0", nID)
 
 	nID = doc.newNodeID()
 	assert.Equal(t, "n1", nID)
+}
+
+func TestNodeLabelStyleChange(t *testing.T) {
+
+	doc := NewEmptyDocument()
+
+	nStyle := doc.PopNodeLabelStyle()
+	assert.Nil(t, nStyle)
+
+	nStyle = &nodeLabelStyle{Alignment: "ABC"}
+	doc.PushNodeLabelStyle(nStyle)
+
+	nStyle = doc.CurrentNodeLabelStyle()
+	assert.NotNil(t, nStyle)
+	assert.Equal(t, "ABC", nStyle.Alignment)
 }

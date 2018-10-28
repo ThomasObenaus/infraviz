@@ -5,8 +5,14 @@ import (
 )
 
 func (d *YedDraw) DrawVPC(vpcs []network.VPC) {
-	for _, vpc := range vpcs {
 
+	style := defaultNodeLabelStyle
+	style.LabelModelPosition = LMPTopLeft
+	d.doc.PushNodeLabelStyle(&style)
+
+	width := float32(500)
+
+	for idx, vpc := range vpcs {
 		awsVpc := vpc.Vpc.AwsVpc
 		tfVpc := vpc.Vpc.TfVpc
 
@@ -28,6 +34,9 @@ func (d *YedDraw) DrawVPC(vpcs []network.VPC) {
 			label.AddText("/ " + tfVpc.Name())
 		}
 
-		d.Rectangle(0, 0, 100, 100, label.String())
+		x := width*float32(idx) + 80.0*float32(idx)
+		d.Rectangle(x, 0, width, 150, label.String())
 	}
+
+	d.doc.PopNodeLabelStyle()
 }

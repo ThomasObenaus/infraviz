@@ -24,7 +24,7 @@ func (d *YedDraw) Rectangle(x float32, y float32, width float32, height float32,
 	snode := &ShapeNode{}
 	snode.Geometry = Geometry{Height: height, Width: width, X: x, Y: y}
 	snode.Shape = Shape{ShapeType: STypeRectangle}
-	nodeLabel := NewNodeLabel(label, doc.style.nodeLabelStyle)
+	nodeLabel := NewNodeLabel(label, *doc.CurrentNodeLabelStyle())
 	snode.NodeLabel = &nodeLabel
 	node.Data = []Data{Data{Key: nodeKeyID, ShapeNode: snode}}
 

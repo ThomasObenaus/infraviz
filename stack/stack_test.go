@@ -20,6 +20,16 @@ func TestNewStack(t *testing.T) {
 
 }
 
+func TestPeek(t *testing.T) {
+
+	stack := NewStack()
+	require.NotNil(t, stack)
+
+	stack.Push("Hallo")
+	assert.Equal(t, 1, stack.Size())
+	assert.Equal(t, "Hallo", stack.Peek())
+}
+
 func TestPush(t *testing.T) {
 
 	stack := NewStack()
@@ -27,7 +37,6 @@ func TestPush(t *testing.T) {
 
 	stack.Push("Hallo")
 	assert.Equal(t, 1, stack.Size())
-
 }
 
 func TestPop(t *testing.T) {
