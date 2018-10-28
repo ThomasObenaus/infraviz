@@ -10,13 +10,24 @@ func (d *YedDraw) DrawVPC(vpcs []network.VPC) {
 		awsVpc := vpc.Vpc.AwsVpc
 		tfVpc := vpc.Vpc.TfVpc
 
-		label := awsVpc.CIDR + "\n(" + awsVpc.VpcID
+		label := NewHTMLLabel()
+		name := awsVpc.NameTag
+		if len(awsVpc.NameTag) == 0 {
+			name = "UNNAMED"
+		}
+		defaultStr := ""
+		if awsVpc.IsDefaultVPC {
+			defaultStr = "(default)"
+		}
+		label.AddStyledText(name+" "+defaultStr, FSBold)
+		label.AddText(" [" + awsVpc.CIDR + "]")
+		label.NewLine()
+		label.AddText(awsVpc.VpcID)
 
 		if tfVpc != nil {
-			label += "/" + tfVpc.Name()
+			label.AddText("/ " + tfVpc.Name())
 		}
-		label += ")"
-		d.Rectangle(0, 0, 100, 100, label)
 
+		d.Rectangle(0, 0, 100, 100, label.String())
 	}
 }

@@ -6,7 +6,7 @@
                   <y:ShapeNode>
                       <y:Geometry height="100" width="100" x="0" y="0"></y:Geometry>
                       <y:Shape type="rectangle"></y:Shape>
-                      <y:NodeLabel alignement="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" horizontalTextPosition="center" verticalTextPosition="bottom">10.106.0.0/16&#xA;(vpc-f8168d93/aws_vpc.vpc_main)</y:NodeLabel>
+                      <y:NodeLabel alignement="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" horizontalTextPosition="center" verticalTextPosition="bottom" modelName="internal" modelPosition="tl">&lt;html&gt;&#xA;  &lt;b&gt;MNG-BNW-eu-central-1-snapshot-VPC-main &lt;/b&gt;&#xA;  &lt;span&gt; [10.106.0.0/16]&lt;/span&gt;&#xA;  &lt;br&gt;&lt;/br&gt;&#xA;  &lt;span&gt;vpc-f8168d93&lt;/span&gt;&#xA;  &lt;span&gt;/ aws_vpc.vpc_main&lt;/span&gt;&#xA;&lt;/html&gt;</y:NodeLabel>
                   </y:ShapeNode>
               </data>
           </node>
@@ -15,7 +15,7 @@
                   <y:ShapeNode>
                       <y:Geometry height="100" width="100" x="0" y="0"></y:Geometry>
                       <y:Shape type="rectangle"></y:Shape>
-                      <y:NodeLabel alignement="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" horizontalTextPosition="center" verticalTextPosition="bottom">172.31.0.0/16&#xA;(vpc-2feb9d47)</y:NodeLabel>
+                      <y:NodeLabel alignement="center" autoSizePolicy="content" fontFamily="Dialog" fontSize="12" fontStyle="plain" horizontalTextPosition="center" verticalTextPosition="bottom" modelName="internal" modelPosition="tl">&lt;html&gt;&#xA;  &lt;b&gt;default (default)&lt;/b&gt;&#xA;  &lt;span&gt; [172.31.0.0/16]&lt;/span&gt;&#xA;  &lt;br&gt;&lt;/br&gt;&#xA;  &lt;span&gt;vpc-2feb9d47&lt;/span&gt;&#xA;&lt;/html&gt;</y:NodeLabel>
                   </y:ShapeNode>
               </data>
           </node>
